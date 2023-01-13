@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_project/data/task_dao.dart';
 
 class Task extends StatelessWidget {
   final String title;
@@ -33,7 +34,9 @@ class Task extends StatelessWidget {
           color: Colors.green,
         ),
         trailing: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              TaskDao().delete(title);
+            },
             icon: const Icon(
               Icons.remove_circle_outline,
               size: 40,

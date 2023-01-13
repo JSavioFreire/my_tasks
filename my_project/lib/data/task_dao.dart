@@ -4,13 +4,13 @@ import '../widgets/task.dart';
 
 class TaskDao {
   static const String taskdatabase = 'CREATE TABLE $tableName('
-      '$title TEXT, '
+      '$name TEXT, '
       '$description TEXT, '
       '$type TEXT)';
 
   static const String tableName = 'taskTable';
 
-  static const String title = 'title';
+  static const String name = 'name';
   static const String description = 'description';
   static const String type = 'type';
 
@@ -30,7 +30,7 @@ class TaskDao {
     final Database dataBase = await getDataBase();
     final List<Map<String, dynamic>> result = await dataBase.query(
       tableName,
-      where: '$title = ?',
+      where: '$name = ?',
       whereArgs: [taskBuscada],
     );
     return toList(result);
@@ -40,14 +40,14 @@ class TaskDao {
     final Database dataBase = await getDataBase();
     return dataBase.delete(
       tableName,
-      where: '$title = ?',
+      where: '$name = ?',
       whereArgs: [taskName],
     );
   }
 
   Map<String, dynamic> toMap(Task eachTask) {
     final Map<String, dynamic> taskMap = {};
-    taskMap[title] = eachTask.title;
+    taskMap[name] = eachTask.title;
     taskMap[description] = eachTask.description;
     taskMap[type] = eachTask.type;
     return taskMap;
@@ -56,7 +56,6 @@ class TaskDao {
   List<Task> toList(List<Map<String, dynamic>> taskMap) {
     final List<Task> taskList = [];
     for (Map<String, dynamic> eachTask in taskMap) {
-      print(eachTask['name']);
       final Task tasks =
           Task(eachTask['name'], eachTask['description'], eachTask['type']);
       taskList.add(tasks);
