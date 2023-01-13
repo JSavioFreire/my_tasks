@@ -5,10 +5,11 @@ class Task extends StatelessWidget {
   final String description;
   final String type;
   const Task(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.type});
+    this.title,
+    this.description,
+    this.type, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

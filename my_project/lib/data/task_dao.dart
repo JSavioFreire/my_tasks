@@ -4,38 +4,25 @@ import '../widgets/task.dart';
 
 class TaskDao {
   static const String taskdatabase = 'CREATE TABLE $tableName('
-      '$name TEXT, '
+      '$title TEXT, '
       '$description TEXT, '
       '$type TEXT)';
 
   static const String tableName = 'taskTable';
 
-  static const String name = 'name';
+  static const String title = 'title';
   static const String description = 'description';
   static const String type = 'type';
 
-  save(Task newAndUpdateTask) async {
+  save(Task newTask) async {
     final Database dataBase = await getDataBase();
-    var taskExist = await find(newAndUpdateTask.title);
-    Map<String, dynamic> newAndUpdateTaskMap = toMap(newAndUpdateTask);
-    if (taskExist.isEmpty) {
-      return await dataBase.insert(tableName, newAndUpdateTaskMap);
-    } else {
-      return await dataBase.update(
-        tableName,
-        newAndUpdateTaskMap,
-        where: '$name = ?',
-        whereArgs: [newAndUpdateTask.title],
-      );
-    }
+    Map<String, dynamic> newTaskMap = toMap(newTask);
+    return await dataBase.insert(tableName, newTaskMap);
   }
 
   Future<List<Task>> findAll() async {
-    print('find all');
     final Database dataBase = await getDataBase();
-    print('teste');
     final List<Map<String, dynamic>> result = await dataBase.query(tableName);
-    print('fianl findall');
     return toList(result);
   }
 
@@ -43,7 +30,7 @@ class TaskDao {
     final Database dataBase = await getDataBase();
     final List<Map<String, dynamic>> result = await dataBase.query(
       tableName,
-      where: '$name = ?',
+      where: '$title = ?',
       whereArgs: [taskBuscada],
     );
     return toList(result);
@@ -53,14 +40,14 @@ class TaskDao {
     final Database dataBase = await getDataBase();
     return dataBase.delete(
       tableName,
-      where: '$name = ?',
+      where: '$title = ?',
       whereArgs: [taskName],
     );
   }
 
   Map<String, dynamic> toMap(Task eachTask) {
     final Map<String, dynamic> taskMap = {};
-    taskMap[name] = eachTask.title;
+    taskMap[title] = eachTask.title;
     taskMap[description] = eachTask.description;
     taskMap[type] = eachTask.type;
     return taskMap;
@@ -69,10 +56,9 @@ class TaskDao {
   List<Task> toList(List<Map<String, dynamic>> taskMap) {
     final List<Task> taskList = [];
     for (Map<String, dynamic> eachTask in taskMap) {
-      final Task tasks = Task(
-          title: eachTask['title'],
-          description: eachTask['description'],
-          type: eachTask['type']);
+      print(eachTask['name']);
+      final Task tasks =
+          Task(eachTask['name'], eachTask['description'], eachTask['type']);
       taskList.add(tasks);
     }
     return taskList;

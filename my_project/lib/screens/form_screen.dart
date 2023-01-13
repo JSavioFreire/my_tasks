@@ -38,6 +38,7 @@ class FormScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: descriptionController,
                     decoration: const InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
@@ -78,9 +79,9 @@ class FormScreen extends StatelessWidget {
                 ElevatedButton(
                     onPressed: () {
                       TaskDao().save(Task(
-                          title: titleController.text,
-                          description: descriptionController.text,
-                          type: 'teste')); //depois mudar type
+                          titleController.text,
+                          descriptionController.text,
+                          'teste')); //depois mudar type
                       Navigator.pop(context);
                     },
                     child: const Text('Adicionar nova tarefa'))
