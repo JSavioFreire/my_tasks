@@ -25,7 +25,7 @@ class Task extends StatelessWidget {
             fontSize: 18,
           ),
         ),
-        tileColor: Colors.white,
+        tileColor: Colors.blue[50],
         leading: const Icon(
           Icons.work,
           size: 40,
