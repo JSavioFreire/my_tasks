@@ -9,6 +9,8 @@ class FormScreen extends StatelessWidget {
   TextEditingController descriptionController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    String typeIcon;
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -57,22 +59,42 @@ class FormScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Icon(
-                          Icons.work,
-                          size: 40,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            typeIcon = 'work';
+                          },
+                          icon: const Icon(
+                            Icons.work,
+                            size: 40,
+                          ),
                         ),
-                        Icon(
-                          Icons.home,
-                          size: 40,
+                        IconButton(
+                          onPressed: () {
+                            typeIcon = 'home';
+                          },
+                          icon: const Icon(
+                            Icons.home,
+                            size: 40,
+                          ),
                         ),
-                        Icon(
-                          Icons.payments_outlined,
-                          size: 40,
+                        IconButton(
+                          onPressed: () {
+                            typeIcon = 'money';
+                          },
+                          icon: const Icon(
+                            Icons.payments_outlined,
+                            size: 40,
+                          ),
                         ),
-                        Icon(
-                          Icons.star,
-                          size: 40,
+                        IconButton(
+                          onPressed: () {
+                            typeIcon = 'star';
+                          },
+                          icon: const Icon(
+                            Icons.star,
+                            size: 40,
+                          ),
                         )
                       ],
                     )),

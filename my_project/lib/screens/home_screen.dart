@@ -19,6 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
+              setState(() {});
+            },
+            icon: const Icon(Icons.refresh),
+          ),
+          IconButton(
+            onPressed: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -26,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )).then((value) => setState(() {}));
             },
             icon: const Icon(Icons.add),
-          )
+          ),
         ],
       ),
       body: FutureBuilder<List<Task>>(
