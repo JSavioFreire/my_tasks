@@ -28,11 +28,6 @@ class Task extends StatelessWidget {
           ),
         ),
         tileColor: Colors.blue[50],
-        leading: const Icon(
-          Icons.work,
-          size: 40,
-          color: Colors.green,
-        ),
         trailing: IconButton(
             onPressed: () {
               TaskDao().delete(title);
